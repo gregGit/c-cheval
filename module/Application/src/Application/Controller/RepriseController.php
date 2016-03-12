@@ -46,26 +46,6 @@ class RepriseController extends AbstractActionController
         ));
     }
 
-//    public function creerAction()
-//    {
-//        $form=$this->_sl->get('Application\Form\FormBuilder')->getCreate(new \Application\Entity\CcReprise(), $this->url()->fromRoute('reprise/default', array('action' => 'creer')));
-//        
-//        $Reprise=new \Application\Entity\CcReprise();
-//        $form->bind($Reprise);
-//        
-//        $request = $this->getRequest();
-//        if ($request->isPost()) {
-//            $form->setData($request->getPost());
-//            if ($form->isValid()) {
-//                $this->getEntityManager()->persist($Reprise);
-//                $this->getEntityManager()->flush();
-//
-//                return $this->redirect()->toRoute('reprise/edit', array('id'=>$Reprise->getId()));
-//            }
-//        }
-//        return array('form' => $form);
-//    }
-
     public function ajoutAction()
     {
         

@@ -115,7 +115,10 @@
             $('.form-control-feedback', element).remove();
             plugin.showMessage();
         }
-
+/**
+* postResquest
+*actions effectuées après l'envoie de la requete
+*/
         var postRequest = function () {
             $('[data-send-disabled]', element).removeAttr('disabled').removeAttr('data-send-disabled');
             $element.removeClass(plugin.options.sendingClass);
