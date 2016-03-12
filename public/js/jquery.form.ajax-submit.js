@@ -60,6 +60,11 @@
 
             setEvent();
         }
+        
+        /**
+        * setMessage
+        * Modifie le contenu de l'élément désigné par feedBackElement
+        */
 
         plugin.setMessage = function (message) {
             if (plugin.options.feedbackElement === false) {
@@ -201,5 +206,3 @@
 jQuery(function () {
     jQuery("form.ajax-submit").ajaxSubmit();
 });
-
-   
