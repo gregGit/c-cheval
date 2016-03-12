@@ -1,0 +1,57 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CcMovementElement
+ *
+ * @ORM\Table(name="cc_movement_element", indexes={@ORM\Index(name="fk_element_movement", columns={"movement"})})
+ * @ORM\Entity
+ */
+class CcMovementElement
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="position", type="integer", nullable=false)
+     */
+    private $position;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="letter", type="string", length=3, nullable=false)
+     */
+    private $letter;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="label", type="string", length=100, nullable=false)
+     */
+    private $label;
+
+    /**
+     * @var \Application\Entity\CcMovement
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\CcMovement")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="movement", referencedColumnName="id")
+     * })
+     */
+    private $movement;
+
+
+}
+

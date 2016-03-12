@@ -1,0 +1,57 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CcMovement
+ *
+ * @ORM\Table(name="cc_movement", indexes={@ORM\Index(name="fk_movement_reprise", columns={"reprise"})})
+ * @ORM\Entity
+ */
+class CcMovement
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="position", type="integer", nullable=false)
+     */
+    private $position;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="coef", type="integer", nullable=false)
+     */
+    private $coef = '1';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="criteria", type="string", length=500, nullable=true)
+     */
+    private $criteria;
+
+    /**
+     * @var \Application\Entity\CcReprise
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\CcReprise")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="reprise", referencedColumnName="id")
+     * })
+     */
+    private $reprise;
+
+
+}
+

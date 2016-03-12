@@ -1,0 +1,37 @@
+<?php
+
+
+    $title = 'Ajouter une reprise';
+    $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <?php
+ $form->prepare();
+//echo $this->form(null,\TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL)->openTag($form);
+//
+//// echo $this->form()->openTag($form);
+// echo $this->formHidden($form->get('id'));
+// echo $this->formRow($form->get('name')->setOption('column-size', 2)->setOption('validation-state','has-errors'));
+// echo $this->formRow($form->get('long_name'));
+// echo $this->formRow($form->get('reglement'));
+// echo $this->formRow($form->get('type'));
+// echo $this->formRow($form->get('annee'));
+// echo $this->formSubmit($form->get('submit'));
+// echo $this->form()->closeTag();
+ 
+ 
+ echo $this->bsFormHorizontal($form);
+ 
+ $flash = $this->flashMessenger();
+ $flash->setMessageOpenFormat('<div%s>
+     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+         &times;
+     </button>
+     <ul><li>')
+     ->setMessageSeparatorString('</li><li>')
+     ->setMessageCloseString('</li></ul></div>');
+
+ echo $flash->render('error',   array('alert', 'alert-dismissible', 'alert-danger'));
+ echo $flash->render('info',    array('alert', 'alert-dismissible', 'alert-info'));
+ echo $flash->render('default', array('alert', 'alert-dismissible', 'alert-warning'));
+ echo $flash->render('success', array('alert', 'alert-dismissible', 'alert-success'));

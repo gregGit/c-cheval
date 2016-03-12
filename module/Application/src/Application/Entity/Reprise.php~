@@ -1,0 +1,204 @@
+<?php
+  
+namespace Application\Entity;
+  
+use Doctrine\ORM\Mapping as ORM;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface; 
+  
+/**
+ * Catégorie des reprises
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="cc_reprise")
+ * @property string $name
+ * @property string $label
+ * @property int $id
+ */
+class Reprise implements InputFilterAwareInterface 
+{
+    protected $inputFilter;
+  
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer");
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+  
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $name;
+  
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $label;
+  
+    /**
+     * Magic getter to expose protected properties.
+     *
+     * @param string $property
+     * @return mixed
+     */
+    public function __get($property) 
+    {
+        return $this->$property;
+    }
+  
+    /**
+     * Magic setter to save protected properties.
+     *
+     * @param string $property
+     * @param mixed $value
+     */
+    public function __set($property, $value) 
+    {
+        $this->$property = $value;
+    }
+  
+    /**
+     * Convert the object to an array.
+     *
+     * @return array
+     */
+    public function getArrayCopy() 
+    {
+        return get_object_vars($this);
+    }
+  
+    /**
+     * Populate from an array.
+     *
+     * @param array $data
+     */
+    public  function exchangeArray($data = array()) 
+    {
+        $this->id = $data['id'];
+        $this->name = $data['name'];
+        $this->label = $data['label'];
+    }
+  
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new \Exception("Not used");
+    }
+  
+    public function getInputFilter()
+    {
+        if (!$this->inputFilter) {
+            $inputFilter = new InputFilter();
+ 
+            $inputFilter->add(array(
+                'name'     => 'id',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'Int'),
+                ),
+            ));
+ 
+            $inputFilter->add(array(
+                'name'     => 'name',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 100,
+                        ),
+                    ),
+                ),
+            ));
+ 
+            $inputFilter->add(array(
+                'name'     => 'label',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 2000,
+                        ),
+                    ),
+                ),
+            ));
+ 
+            $this->inputFilter = $inputFilter;
+        }
+ 
+        return $this->inputFilter;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Reprise
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set label
+     *
+     * @param string $label
+     *
+     * @return Reprise
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * Get label
+     *
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+}

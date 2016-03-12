@@ -1,0 +1,36 @@
+    <?php
+    $flash = $this->flashMessenger();
+ $flash->setMessageOpenFormat('<div%s>
+     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+         &times;
+     </button>
+     <ul><li>')
+     ->setMessageSeparatorString('</li><li>')
+     ->setMessageCloseString('</li></ul></div>');
+
+ echo $flash->render('error',   array('alert', 'alert-dismissible', 'alert-danger'));
+ echo $flash->render('info',    array('alert', 'alert-dismissible', 'alert-info'));
+ echo $flash->render('default', array('alert', 'alert-dismissible', 'alert-warning'));
+ echo $flash->render('success', array('alert', 'alert-dismissible', 'alert-success'));
+ 
+$tabs = array(
+    array('title' => "Informations",
+        'content' => $this->render("edit_panel_info"),
+    ),
+//    array('title' => "Mouvements",
+//        'content' => $this->render("edit_panel_mouvements"),
+//    ),
+    array('title' => "Ensemble",
+        'content' => "Liste des notes d'ensembles",
+    ),
+);
+echo $this->bs3Tab($tabs);
+
+//
+//$form->prepare();
+// echo $this->form($form, \TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL);
+?>
+
+<div id="ajStatus">
+    
+</div>

@@ -1,0 +1,71 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CcReprise
+ *
+ * @ORM\Table(name="cc_reprise", indexes={@ORM\Index(name="fk_reprise_categorie", columns={"categorie"})})
+ * @ORM\Entity
+ */
+class CcReprise
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=100, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="long_name", type="string", length=2000, nullable=true)
+     */
+    private $longName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="reglement", type="string", length=2000, nullable=true)
+     */
+    private $reglement;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=1, nullable=false)
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="annee", type="string", length=4, nullable=false)
+     */
+    private $annee;
+
+    /**
+     * @var \Application\Entity\CcCategorie
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\CcCategorie")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="categorie", referencedColumnName="id")
+     * })
+     */
+    private $categorie;
+
+
+}
+

@@ -1,0 +1,9 @@
+<ul><?php
+foreach($this->listReprises as $Reprise) {
+    echo $this->repriseRow($Reprise);
+//    printf('<li><a href="%s">%s</a>', $this->url('reprise/edit', array('key'=>$Reprise->getId())), $Reprise->getName());
+}
+?>
+</ul>
+
+<a href="/reprise/creer">Créer</a>

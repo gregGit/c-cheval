@@ -1,0 +1,52 @@
+<?php
+
+
+$sectionMovements = $this->bs3GridSection(null, array('attribs' => array('class' => "reprise reprise-movements stripped")));
+//$bsRow = new Bootstrap3\View\Helper\Bs3GridRow();
+//$bsRow->addCol(array($this->formLabel($nbMovement), array(8,6)))
+//        ->addCol(array($this->formNumber($nbMovement), array(4,6)))
+//        ;
+//$container->addRow($bsRow);
+
+$nextPosition = 0;
+foreach ($this->Reprise->getMovements() as $movement) {
+    $sectionMovements->addRow($this->repriseMovementRow($movement));
+    $nextPosition = $movement->getPosition();
+}
+$nextPosition++;
+
+
+
+
+////$addElementDialog=$this->bs3Modal('addElement', 'Ajouter un élément', $this->form($editMvtForm, \TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL));
+//$container->addRow(array('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addElement">Ajouter un élément</button>'));
+//
+//
+echo $this->bs3ModalRemote('editMovement','Modification');
+//
+//echo $this->bs3ModalRemote('addElement','Ajouter un élément', $this->url('rest-form/element', array('mvt_id'=>2)));
+//
+
+$this->addMovementForm
+        ->setBsHorizontalSizes()
+        ->setAttributes(
+                array(
+                    'class' => 'ajax-submit',
+                    'action' => $this->url('rest-movement/submit', array('reprise_id' => $this->Reprise->getId())),
+                    'method' => 'POST',
+                    'data-done' => 'addMovement'
+                )
+)
+        ->forInsert();
+$this->addMovementForm->get('position')->setValue($nextPosition);
+echo $sectionMovements->render();
+echo $this->form($this->addMovementForm, \TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_INLINE);
+?>
+
+<template id="addElementButton">
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+            <a id="addElementForm" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>Ajouter un élément</a>
+        </div>
+    </div>
+</template>
